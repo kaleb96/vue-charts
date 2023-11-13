@@ -1,39 +1,34 @@
 <template>
-    <canvas id="barChart"></canvas>
+    <canvas ref="barChart" id="barChart"></canvas>
 </template>
 
 <script>
-import Chart from 'chart.js/auto';
 export default {
+    props: ['propsdata'],
     mounted() {
-    (async function() {
-      const data = [
-        { year: 2010, count: 10 },
-        { year: 2011, count: 20 },
-        { year: 2012, count: 15 },
-        { year: 2013, count: 25 },
-        { year: 2014, count: 22 },
-        { year: 2015, count: 30 },
-        { year: 2016, count: 28 },
-      ];
-
-      new Chart(
-        document.getElementById('barChart'),
-        {
-          type: 'bar',
-          data: {
-            labels: data.map(row => row.year),
+      this.renderBarChart();
+    },
+    
+    methods: {
+      renderBarChart() {
+          // new Chart(document.getElementById('barChart'), {
+          // new Chart(this.$refs.barChart, {
+          new this.$_Chart(this.$refs.barChart, {
+            type: 'bar',
+            data: {
+            labels: this.propsdata.map(row => row.year),
+            // labels: this.propsdata,
             datasets: [
               {
-                label: 'barChart by year',
-                data: data.map(row => row.count)
-              }
-            ]
+                label: 'TEST Bar Chart',
+                data: this.propsdata.map(row => row.count)
+                // data: this.propsdata
+              }]
+            }
           }
-        }
-      );
-    })();   
-  }
+        );
+      }
+    }  
 }
 </script>
 
